@@ -7,6 +7,7 @@ Release:	7
 License:	nonfree
 Group:		Applications/Publishing/TeX
 Source0:	ftp://ftp.informatik.uni-stuttgart.de/pub/%{_short_name}/%{_short_name}.tar.Z
+# Source0-md5:	ba1a9a6796699d6bcda58e2225e28d9a
 BuildRequires:	tetex-latex
 PreReq:		tetex >= 1.0.7.beta_20001218-2 
 Requires(post,postun):	/usr/bin/mktexlsr
