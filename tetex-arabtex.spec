@@ -9,7 +9,7 @@ Group:		Applications/Publishing/TeX
 Source0:	ftp://ftp.informatik.uni-stuttgart.de/pub/%{_short_name}/%{_short_name}.tar.Z
 # Source0-md5:	ba1a9a6796699d6bcda58e2225e28d9a
 BuildRequires:	tetex-latex
-PreReq:		tetex >= 1.0.7.beta_20001218-2 
+PreReq:		tetex >= 1.0.7.beta_20001218-2
 Requires(post,postun):	/usr/bin/mktexlsr
 Requires(post,postun):	/usr/bin/tetex-updmap
 Requires:	tetex
@@ -32,15 +32,15 @@ install -d $RPM_BUILD_ROOT%{_datadir}/texmf/{tex/%{_short_name},source/%{_short_
 	$RPM_BUILD_ROOT%{_datadir}/texmf/dvips/config
 
 install texinput/* $RPM_BUILD_ROOT%{_datadir}/texmf/tex/%{_short_name}/
-install mfinput/* $RPM_BUILD_ROOT%{_datadir}/texmf/source/%{_short_name}/ 
-install tfm/* $RPM_BUILD_ROOT%{_datadir}/texmf/fonts/tfm/%{_short_name}/ 
-install psfonts/*pfb $RPM_BUILD_ROOT%{_datadir}/texmf/fonts/type1/%{_short_name}/ 
+install mfinput/* $RPM_BUILD_ROOT%{_datadir}/texmf/source/%{_short_name}/
+install tfm/* $RPM_BUILD_ROOT%{_datadir}/texmf/fonts/tfm/%{_short_name}/
+install psfonts/*pfb $RPM_BUILD_ROOT%{_datadir}/texmf/fonts/type1/%{_short_name}/
 install psfonts/arabtex.map $RPM_BUILD_ROOT%{_datadir}/texmf/dvips/config/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post 
+%post
 umask 022
 /usr/bin/mktexlsr
 echo arabtex.map >>/etc/sysconfig/tetex-updmap/maps.lst
@@ -54,7 +54,7 @@ sed -e 's/arabtex.map//' /etc/sysconfig/tetex-updmap/maps.lst \
 mv -f /etc/sysconfig/tetex-updmap/maps.lst.rpmtmp /etc/sysconfig/tetex-updmap/maps.lst
 /usr/bin/tetex-updmap
 
-%files 
+%files
 %defattr(644,root,root,755)
 %doc {announce,changes,readme}.txt doc/{readme.305,arabtex.doc,arabtex.faq}
 %doc examples report arabtex.htm arabtex.gif
