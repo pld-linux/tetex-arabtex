@@ -6,8 +6,6 @@ Version:	1
 Release:	6
 License:	nonfree
 Group:		Applications/Publishing/TeX
-Group(de):	Applikationen/Publizieren/TeX
-Group(pl):	Aplikacje/Publikowanie/TeX
 Source0:	ftp://ftp.informatik.uni-stuttgart.de/pub/%{_short_name}/%{_short_name}.tar.Z
 Requires:	tetex
 Requires:	tetex-latex
