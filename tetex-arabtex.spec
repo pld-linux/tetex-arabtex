@@ -2,7 +2,7 @@
 Summary:	Set of LaTeX macros for arabtex
 Version:	1
 Name:		tetex-arabtex
-Release:	4
+Release:	5
 Copyright:	nonfree
 Group:		Applications/Publishing/TeX
 Group(de):	Applikationen/Publizieren/TeX
@@ -11,7 +11,7 @@ Source0:	ftp://ftp.informatik.uni-stuttgart.de/pub/%{_short_name}/%{_short_name}
 Requires:	tetex
 Requires:	tetex-latex
 BuildRequires:	tetex-latex
-Prereq:		tetex
+Prereq:		tetex >= 1.0.7.beta_20001218-2 
 Prereq:		/usr/bin/mktexlsr
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -52,19 +52,14 @@ arabtex.htm,changes.txt,install.txt,readme.txt}
 
 %post 
 %{_bindir}/mktexlsr
-sed -e 's/extra_modules=\".*/\0 arabtex.map/' <%{_datadir}/texmf/dvips/config/updmap > %{tmpdir}/updmap 
-cp %{tmpdir}/updmap %{_datadir}/texmf/dvips/config/
-cd %{_datadir}/texmf/dvips/config/
-chmod 700 updmap
-./updmap
+echo arabtex.map >>/etc/sysconfig/tetex-updmap/maps.lst
+/usr/bin/tetex-updmap
 
 %postun
 %{_bindir}/mktexlsr
-sed -e 's/arabtex.map//' <%{_datadir}/texmf/dvips/config/updmap > %{tmpdir}/updmap 
-cp %{tmpdir}/updmap %{_datadir}/texmf/dvips/config/
-cd %{_datadir}/texmf/dvips/config/
-chmod 700 updmap
-./updmap
+sed -e 's/arabtex.map//' < /etc/sysconfig/tetex-updmap/maps.lst> %{tmpdir}/updmap 
+cp %{tmpdir}/updmap /etc/sysconfig/tetex-updmap/maps.lst
+/usr/bin/tetex-updmap
 
 %clean
 rm -rf $RPM_BUILD_ROOT
