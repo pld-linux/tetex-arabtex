@@ -1,5 +1,6 @@
 %define _short_name 	arabtex
 Summary:	Set of LaTeX macros for arabtex
+Summary(pl):	Zestaw makr LaTeX-a dla arabtexa
 Name:		tetex-arabtex
 Version:	1
 Release:	6
@@ -18,10 +19,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Set of LaTeX macros for arabtex.
 
+%description -l pl
+Zestaw makr LaTeX-a dla arabtexa.
+
 %prep
 %setup -q -n %{_short_name}
-
-%build
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -45,7 +47,7 @@ echo arabtex.map >>/etc/sysconfig/tetex-updmap/maps.lst
 %postun
 %{_bindir}/mktexlsr
 sed -e 's/arabtex.map//' < /etc/sysconfig/tetex-updmap/maps.lst> %{tmpdir}/updmap 
-cp %{tmpdir}/updmap /etc/sysconfig/tetex-updmap/maps.lst
+cp -f %{tmpdir}/updmap /etc/sysconfig/tetex-updmap/maps.lst
 /usr/bin/tetex-updmap
 
 %clean
@@ -57,5 +59,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/texmf/tex/%{_short_name}
 %{_datadir}/texmf/source/%{_short_name}
 %{_datadir}/texmf/fonts/tfm/%{_short_name}
-%{_datadir}/texmf/fonts/type1/%{_short_name}/
+%{_datadir}/texmf/fonts/type1/%{_short_name}
 %{_datadir}/texmf/dvips/config/*
