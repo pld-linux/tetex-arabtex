@@ -1,6 +1,6 @@
 %define _short_name 	arabtex
 Summary:	Set of LaTeX macros for arabtex
-Summary(pl):	Zestaw makr LaTeX-a dla arabtexa
+Summary(pl):	Zestaw makr LaTeXa dla arabtexa
 Name:		tetex-arabtex
 Version:	1
 Release:	7
@@ -20,7 +20,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Set of LaTeX macros for arabtex.
 
 %description -l pl
-Zestaw makr LaTeX-a dla arabtexa.
+Zestaw makr LaTeXa dla arabtexa.
 
 %prep
 %setup -q -n %{_short_name}
