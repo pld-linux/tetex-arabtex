@@ -3,15 +3,16 @@ Summary:	Set of LaTeX macros for arabtex
 Summary(pl):	Zestaw makr LaTeX-a dla arabtexa
 Name:		tetex-arabtex
 Version:	1
-Release:	6
+Release:	7
 License:	nonfree
 Group:		Applications/Publishing/TeX
 Source0:	ftp://ftp.informatik.uni-stuttgart.de/pub/%{_short_name}/%{_short_name}.tar.Z
+BuildRequires:	tetex-latex
+PreReq:		tetex >= 1.0.7.beta_20001218-2 
+Requires(post,postun):	/usr/bin/mktexlsr
+Requires(post,postun):	/usr/bin/tetex-updmap
 Requires:	tetex
 Requires:	tetex-latex
-BuildRequires:	tetex-latex
-Prereq:		tetex >= 1.0.7.beta_20001218-2 
-Prereq:		/usr/bin/mktexlsr
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -35,24 +36,27 @@ install tfm/* $RPM_BUILD_ROOT%{_datadir}/texmf/fonts/tfm/%{_short_name}/
 install psfonts/*pfb $RPM_BUILD_ROOT%{_datadir}/texmf/fonts/type1/%{_short_name}/ 
 install psfonts/arabtex.map $RPM_BUILD_ROOT%{_datadir}/texmf/dvips/config/
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post 
-%{_bindir}/mktexlsr
+umask 022
+/usr/bin/mktexlsr
 echo arabtex.map >>/etc/sysconfig/tetex-updmap/maps.lst
 /usr/bin/tetex-updmap
 
 %postun
-%{_bindir}/mktexlsr
-sed -e 's/arabtex.map//' < /etc/sysconfig/tetex-updmap/maps.lst> %{tmpdir}/updmap 
-cp -f %{tmpdir}/updmap /etc/sysconfig/tetex-updmap/maps.lst
+umask 022
+/usr/bin/mktexlsr
+sed -e 's/arabtex.map//' /etc/sysconfig/tetex-updmap/maps.lst \
+	> /etc/sysconfig/tetex-updmap/maps.lst.rpmtmp
+mv -f /etc/sysconfig/tetex-updmap/maps.lst.rpmtmp /etc/sysconfig/tetex-updmap/maps.lst
 /usr/bin/tetex-updmap
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files 
 %defattr(644,root,root,755)
 %doc {announce,changes,readme}.txt doc/{readme.305,arabtex.doc,arabtex.faq}
-%doc examples report arabtex.htm arabtex.gif 
+%doc examples report arabtex.htm arabtex.gif
 %{_datadir}/texmf/tex/%{_short_name}
 %{_datadir}/texmf/source/%{_short_name}
 %{_datadir}/texmf/fonts/tfm/%{_short_name}
