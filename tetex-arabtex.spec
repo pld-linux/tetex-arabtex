@@ -56,10 +56,10 @@ mv -f /etc/sysconfig/tetex-updmap/maps.lst.rpmtmp /etc/sysconfig/tetex-updmap/ma
 
 %files
 %defattr(644,root,root,755)
-%doc {announce,changes,readme}.txt doc/{readme.305,arabtex.doc,arabtex.faq}
-%doc examples report arabtex.htm arabtex.gif
+%doc {announce,changes,readme}.txt doc/txt/{readme.305,arabtex.doc,arabtex.faq}
+%doc examples arabtex.htm arabtex.gif
 %{_datadir}/texmf/tex/%{_short_name}
 %{_datadir}/texmf/source/%{_short_name}
 %{_datadir}/texmf/fonts/tfm/%{_short_name}
 %{_datadir}/texmf/fonts/type1/%{_short_name}
-%{_datadir}/texmf/dvips/config/*
+%{_datadir}/texmf/dvips/config/%{_short_name}.map
